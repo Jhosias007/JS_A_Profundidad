@@ -1,0 +1,98 @@
+Comandos de Git
+git init	inicializa un repositorio o directorio con git
+git add		agrega los cambios del repositorio inicializado (nuevos archivos, modificaciones, archivos borrados, etc) para hacer el commit (agregar arhivos de uno en uno con nombre o todos con el punto ".")
+git commit	guarda los cambios / modificaciones del repositorio inicializado. Se le agrega comentarios con: ... -m "comentario". Puedes usar la propiedad -a para obviar el git add en caso de que ya hallas añadido el archivo
+		git commit --amend: Se usa cuando quieres agregar modificaciones al ultimo commit que has hecho. para esto tendras que haber agregado las modificaciones con "git add X" y luego ejecutar "git commit --amend".
+git push	envia los commits del repositorio local al repositorio remoto
+git status	muestra el estado del repositorio inicializado, si hay cambios no guardados o cosas asi.
+git log arh	muestra las versiones de los archivos, quien los hizo, modifico o borro en que momento y da su codigo de cada version del archivo. No muestra el contenido de las versiones.
+git show arh	muestra las modificaciones que ocurrieron el el archivo solicitado
+git diff a b	muestra las diferencias entre una version de un archivo o otra de este mismo. Se remplazan a y b poor los codigos de la version del arhivo a comparar.
+git reset a	vuelve a una version que nosotros especifiquemos con el codigo de version del commit sustituyendolo en "a". Usa: "--soft": no borra lo que hay en staiging. "--hard": borra contenido en staiging. "HEAD" borrar staiging
+git checkout a	vuelve a una version del archivo sin necesidad de tener que quedarse ahi, es decir, vamos a una version anterior y nos podemos quedar ahi o volvemos a la presente
+git branch a	crea una rama a partir de donde estas, sustituye "a" por el nombre de la rama que quieras ponerle
+git checkout a	tambien funciona para ir a otras ramas que tengamos en el repositorio
+git merge a	une o fusiona dos ramas. lo que hace es basicamente un commit, crea un commit desde la rama en que te encuentres y agrega los cambios de la rama que agreges, esta rama se sustituye en "a"
+git tag		para el uso de tags. se agregan a los commits con nombre de versiones normalmente
+gitk		muestra interfaz grafica de los branchs del repositorio
+git clone a	clona un repositorio remoto a la carpeta actual. Sustituye a por el url o link. Si el repositorio es publico no pedira contraseña
+git rebase
+git stash	regresa al ultimo commit que has hecho en caso de que hayas hecho cambios sin haberlos guardado en un commit. Hay: ... list; ... drop; ... branch X; ...
+git clean	borra los archivos no deseados. Para hacerlo correctamente hay que usar: git clean -f. Puedes ver lo que se va a borrar con git clean --dry-run
+git cherry-pick	trae solo un commit viejo o un unico commit de una rama a otra. El commit se especifica con el codigo del commit.
+git reflog	toda la historia de todo el repositorio (commits, adds, checkouts, puntos previos al realizar un git reset --hard). Se puede usar para volver en cualquier punto de la historia. como git log, pero con toda la historia.
+git grep X	REPASAR COMANDO, ES UTIL. busca coincidencias de tu busqueda en los archivos. Usar " -n X" para especificar donde aparece X. Usar " -c X" para especificar cuantas veces y en que archivo aparece X.
+git log -S X	Busca coincidensas en tu busqueda en los commits
+git blame X	Muestra quien hizo las lineas de codigo del archivo X. Puede ponerse el parametro "-c" para mejor identacion. Puede ponerse el param. "-Lx,y"donde "x" y "y" deben ser las lineas a evaluar, como un rango EJ: "-L10,20"
+
+Alias:
+git superlog	remplaza a "git log" con varios parametros
+git stats	remplaza a "git shortlog" con algunos parametros. esto indica quienes hicieron la cantidad de commits que hay.
+
+Con el siguiente link: "https://pandao.github.io/editor.md/en.html" podemos modificar de una forma practica el README.md de nuestro repositorio remoto.
+
+Comandos de terminal: 
+cd	cambiar directorio
+man	manual de uso de un comando
+whatis	lo que es el comando
+mv	mover directorio o carpeta
+ls	muestra archivos y directorios o carpetas de la ruta en que se ejecuta
+cat	muestra contenido del archivo que se solicite
+pwd	muestra la ruta en la que estas
+mkdir	crear un directorio
+cp	copiar archivo
+rm	borrar archivo
+rmdir	borrar directorio
+wc	cuenta las lineas, caracteres y bits de un arhivo
+tar	comprimir archivos
+zip	comprimir arhivos
+unzip	descomprimir archivos
+ctrl+l	limpiar terminal
+htop	muestra procesos
+Comandos de Busqueda
+which	muestra la ruta de ubicacion del programa
+whereis	muestra la ruta de ubicacion del programa
+find	busca archivos y directorios. Puede filtrar la busqueda por nombre, tipo, tamaño, etc.
+grep	busca coincidencias dentro de un arhcivo.
+	-i : ignore case sensitive
+	-c : ocurrence count
+	-v : que no coincidan con la busqueda
+
+Comandos de Red
+ifconfig	sirve para ver la mascara de red, puerto de transmisión, tarjeta de red, etc
+ping		nos muestra si una ip o pagina, esta activa, si salen paquetes es porque hay conexión.
+curl		podemos traer el html de una pagina, podríamos guardarlo con el estándar output.
+wget 		descarga el archivo html, pero con formato.
+traceroute	nos sirve para ver por cuales computadoras tenemos que ir pasando para llegar. PJ: A una pagina web. 
+		Ejemplo, nos saldrán las ip que tenemos que pasar para llegar a la pagina que queremos.
+netstat		nos muestra los dispositivos de red
+
+
+Wildcards
+ - Son caracteres especiales que ayudan a realizar una busqueda mas avanzada de arhivos o directorios.
+ - Estas wildcards se pueden utilizar en cualquier comando que manipule arhivos como ls, mv, cp, rm
+ - Similar a las expresiones regulares
+
+* - Busca todo, sin numero especifico de caracteres. PJ: ls *.txt
+? - Busca cualquier caracter, este solo remplaza a un caracter. PJ: ls carpetaArhivosAño202?
+[char's] - Busca por caracteres especificos. PJ: ls [ad]*	<---	Busca los arhivos que comeincen con "a" o "d"
+	[!char's] - Busca a los caracteres que no esten en el grupo
+	[[:clase:]] - Busca caracteres que conicidan con la clase.
+
+Operadores de control
+ * Ejecutar comandos de manera sincrona:
+	Usar ";" al final de cada comando. EJ: ls; mkdir newArcivo; ls
+	Esto ejecuta cada comando de uno en uno en un mismo proceso.
+ * Ejecutar comandos de manera asincrona:
+	Usar "&" al final de cada comando. EJ: ls & mkdir newArchivo & cal
+	Esto ejecuta los comandos "al mismo tiempo" en un proceso multihilo
+ * Ejecutar comandos con condicionales
+	Usar "&&" al final del comando a evaluar. EJ: cd directorioX && touch archivo.txt && echo "Archivo creado"
+	Esto ejecuta un comando si se cumple el anterior
+	Usar "||" al final del comando a evaluar. EJ: cd directorioX || touch archivo.txt
+	Esto ejecuta comandos uno a uno (realmente no se lo que hace (mejorar))
+
+
+
+
+
