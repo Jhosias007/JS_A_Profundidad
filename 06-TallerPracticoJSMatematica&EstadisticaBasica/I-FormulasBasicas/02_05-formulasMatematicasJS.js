@@ -29,14 +29,46 @@ const alturaTriangulo = 5.5
 const perimetroTriangulo = ladoTriangulo1 + ladoTriangulo2 + ladoTrianguloBase
 const areaTriangulo = (ladoTriangulo1 * alturaTriangulo) / 2
 
-function calcTri(l1, l2, base, altura) {
+function calcTriangulo(l1, l2, base, altura) {
     return {
         perimetro: l1 + l2 + base,
         area: (base * altura) / 2
     }
 }
-console.log(calcTri(3, 5, 6, 7))
-console.log(calcTri(12, 6, 21, 7))
+console.log(calcTriangulo(3, 5, 6, 7))
+
+function calcAlturaTrianguloIsosceles(lados, base) {
+    if (lados != base) {
+        return {
+            h: Math.sqrt(lados ** 2 - ((base ** 2) / 4))
+        }
+    } else {
+        return ("El triangulo no es isosceles");
+    }
+}
+console.log(calcAlturaTrianguloIsosceles(6, 2))
+
+function calcAlturaTrianguloEscaleno(a, b, c) {
+    if (a == b || a == c || b == c) {
+        return false;
+      } else {
+        const s = (a + b + c) / 2;
+        const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+        const ha = (2 * area) / a; // altura de a
+        const hb = (2 * area) / b; // altura de b
+        const hc = (2 * area) / c; // altura de c
+    
+        return {
+            ha,
+            hb,
+            hc
+        };
+      }
+}
+console.log(calcAlturaTrianguloEscaleno(3, 4, 5))
+
+
+
 
 console.groupEnd("Triangulo");
 
@@ -57,10 +89,10 @@ console.log({
     areaCirculo
 });
 
-function calcCirculo (radio) {
+function calcCirculo(radio) {
     return {
-        circunferencia: 2*radio*PI,
-        area: (Math.PI)*(Math.pow(radio, 2))
+        circunferencia: 2 * radio * PI,
+        area: (Math.PI) * (Math.pow(radio, 2))
     }
 }
 
