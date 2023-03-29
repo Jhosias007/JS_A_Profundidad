@@ -6,11 +6,8 @@ let tmp = 0;
 btnCalc.addEventListener("click", calcPromedio);
 
 function calcPromedio () {
-    let numsArray = nums.value.split(" ").map(i => i = Number(i)); // Var numsArray es la lista en enteros
-    for (i of numsArray) {
-        tmp = tmp + i;
-    }
-    tmp = tmp/numsArray.length
-    result.innerText = tmp
+    let numsArray = nums.value.split(" ").map(i => i = Number(i));
+    numsArray.map(i => tmp = tmp + i)
+    result.innerText = tmp/numsArray.length
     tmp = 0;
 }
