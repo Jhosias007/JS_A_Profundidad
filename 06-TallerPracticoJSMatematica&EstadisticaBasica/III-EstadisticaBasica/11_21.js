@@ -1,41 +1,43 @@
+
 const nums = document.querySelector("#nums");
 const btnCalc = document.querySelector("#btnCalc");
 const resultPromedio = document.querySelector("#resultPromedio");
 const resultMediana = document.querySelector("#resultMediana");
 const resultModa = document.querySelector("#resultModa");
+const resultMediaGeometrica = document.querySelector("#resultMediaGeometrica")
+const JsMath = {};
 
 btnCalc.addEventListener("click", fnPrincipal);
 
-function fnPrincipal() { // Llamamiento a las 3 funciones
-    calcPromedio2();
-    calcMediana();
-    calcModa();
+JsMath.esPar = () => nums.value.split(" ").map(i => i = Number(i)).length % 2 == 0 ? true : false
+
+function fnPrincipal() {
+    JsMath.calcPromedio2();
+    JsMath.calcMediana();
+    JsMath.calcModa();
+    JsMath.calcMediaGeometrica();
+    // JsMath.esPar(); innecesario
 }
 
-function calcPromedio() { // Forma 1 con metodo map o con for
+JsMath.calcPromedio = function calcPromedio() { // Forma 1 con metodo map o con for
     const numsArray = nums.value.split(" ").map(i => i = Number(i));
     numsArray.map(i => tmp = tmp + i)
     resultPromedio.innerText = tmp / numsArray.length
     tmp = 0;
 }
 
-function calcPromedio2() { // Forma 2 con metodo reduce
+JsMath.calcPromedio2 = function calcPromedio2() { // Forma 2 con metodo reduce
     const numsArray = nums.value.split(" ").map(i => i = Number(i));
     resultPromedio.innerText = numsArray.reduce((a, b) => a + b) / numsArray.length;
 }
 
-const esPar = () =>
-    nums.value.split(" ") // Separo
-        .map(i => i = Number(i)) // Convierto a numero
-        .length % 2 == 0 ? true : false // Valido si es par o no
-
-function calcMediana() {
+JsMath.calcMediana = function calcMediana() {
     const numsArray =
         nums.value.split(" ") // separo cada numero
             .map(i => i = Number(i)) // convierto cada elem. a numero
             .sort((a, b) => a - b); // ordeno la lista de menor a mayor
 
-    if (esPar()) {
+    if (JsMath.esPar()) {
         let index = (numsArray.length / 2) - 1;
         resultMediana.innerText = (numsArray[index] + numsArray[index + 1]) / 2;
     } else {
@@ -45,10 +47,8 @@ function calcMediana() {
 
 }
 
-function calcModa() {
-    const numsArray =
-        nums.value.split(" ")
-            .map(i => Number(i));
+JsMath.calcModa = function calcModa() {
+    const numsArray = nums.value.split(" ").map(i => Number(i));
 
     numsArray.length == 1 ? resultModa.innerText = "moda inexistente para el caso" : {};
 
@@ -67,7 +67,15 @@ function calcModa() {
     } else {
         resultModa.innerText = arrayBidismensional[arrayBidismensional.length - 1][0];
     }
-    console.log(arrayBidismensional);
-
 }
 
+JsMath.calcMediaGeometrica = function calcMediaGeometrica() {
+    const numsArray = nums.value.split(" ").map(i => Number(i));
+    let accValue = 1;
+
+    for (let i = 0; i < numsArray.length; i++) {
+        accValue *= numsArray[i];
+    }
+
+    resultMediaGeometrica.innerText = Math.pow(accValue, 1 / numsArray.length);
+}
