@@ -1,11 +1,4 @@
-const nums = document.querySelector("#nums");
-const btnCalc = document.querySelector("#btnCalc");
-const resultPromedio = document.querySelector("#resultPromedio");
-const resultMediana = document.querySelector("#resultMediana");
-const resultModa = document.querySelector("#resultModa");
-const resultMediaGeometrica = document.querySelector("#resultMediaGeometrica");
 const JsMath = {};
-
 
 JsMath.esPar = function (arr) {
   return arr.length % 2 == 0 ? true : false;
@@ -19,7 +12,7 @@ JsMath.media = function (arr) {
   return accValue / arr.length;
 };
 
-JsMath.calcMediana = function (arr) {
+JsMath.mediana = function (arr) {
   arr.sort((a, b) => a - b); // Ordeno el array.
 
   let index = arr.length / 2;
@@ -31,7 +24,7 @@ JsMath.calcMediana = function (arr) {
   }
 };
 
-JsMath.calcModa = function (arr) {
+JsMath.moda = function (arr) {
   let obj = {};
   // Inserto numero (clave) y las veces que se repite este (valor)
   arr.map((i) => {
