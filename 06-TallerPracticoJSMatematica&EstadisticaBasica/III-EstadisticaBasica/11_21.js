@@ -4,6 +4,10 @@ JsMath.esPar = function (arr) {
   return arr.length % 2 == 0 ? true : false;
 };
 
+JsMath.ordenarMinToMax = function (arr) {
+  return arr.sort((a, b) => a - b);
+};
+
 JsMath.media = function (arr) {
   let accValue = 0;
   for (let i in arr) {
@@ -13,7 +17,8 @@ JsMath.media = function (arr) {
 };
 
 JsMath.mediana = function (arr) {
-  arr.sort((a, b) => a - b); // Ordeno el array.
+  JsMath.ordenarMinToMax(arr);
+  // arr.sort((a, b) => a - b); // Ordeno el array.
 
   let index = arr.length / 2;
 
