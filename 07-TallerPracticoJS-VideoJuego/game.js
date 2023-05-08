@@ -23,15 +23,10 @@ function setCanvasSize() {
   canvas.setAttribute("height", canvasSize);
   elementSize = (canvasSize - 16) / 10;
 
-  // let ppx = 0 * elementSize;
-  // let ppy = 0 * elementSize;
-
   startGame();
-  return elementSize;
 }
 
 function startGame() {
-  let inicio;
   game.font = elementSize + "px verdana";
   //game.textAlign = "start";
 
@@ -52,6 +47,7 @@ function startGame() {
       if (col == "O") {
         playerPosition.x = posX;
         playerPosition.y = posY;
+        game.fillText(emojis["PLAYER"], playerPosition.x, playerPosition.y);
       }
     });
   });
@@ -59,6 +55,6 @@ function startGame() {
 }
 
 function fnUp() {
-  playerPosition.y -= 1 * elementSize;
-  game.fillText(emojis["PLAYER"], playerPosition.x, playerPosition.y);
+  playerPosition.y -= elementSize;
+  setCanvasSize();
 }
